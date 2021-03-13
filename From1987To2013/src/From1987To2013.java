@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class From1987To2013 {
@@ -6,33 +7,26 @@ public class From1987To2013 {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
 		int startingYear=sc.nextInt();
-		for(int i=startingYear+1;i<10000;i++) {
-			String s=String.valueOf(i);
-			String[] year=s.split("");
-			if(compareArray(year)) {
-				print(year);
+		for(int i=startingYear+1;i<=10000;i++) {
+			if(validate(i)) {
+				System.out.println(i);
 				break;
 			}
 		}
 
 	}
 
-	private static void print(String[] year) {
+	private static boolean validate(int year) {
 		// TODO Auto-generated method stub
-		for(int i=0;i<year.length;i++) {
-			System.out.print(year[i]);
-		}
-		
-	}
-
-	private static boolean compareArray(String[] year) {
-		// TODO Auto-generated method stub
-		for(int i=0;i<year.length;i++) {
-			for(int j=i+1;j<year.length;j++) {
-				if(year[i].equals(year[j])) {
-					return false;
-				}
+		HashSet<Integer> digits=new HashSet<Integer>();
+		int n=year;
+		while(n!=0) {
+			int r=n%10;
+			if(digits.contains(r)) {
+				return false;
 			}
+			digits.add(r);
+			n=n/10;
 		}
 		return true;
 	}
